@@ -83,3 +83,22 @@ class StockTradingEngine:
             break  # no further matches possible; if highest buy isn't >= lowest sell, the other in betweens won't fit the matching condition either
 
     self.release_lock()
+
+
+#Wrapper for testing
+def test_stock_engine():
+    engine = StockTradingEngine()
+    
+    
+    engine.addOrder("Buy", "AAPL", 10, 150)   #buy appl at 150
+    engine.addOrder("Sell", "AAPL", 5, 145)   #sell at $145 (should match with above)
+    engine.addOrder("Sell", "AAPL", 10, 155)  #sell at $155 (should not match)
+
+    engine.addOrder("Buy", "GOOGL", 20, 2800)
+    engine.addOrder("Sell", "GOOGL", 20, 2795)  #should match
+
+    print("Remaining Buy Orders:", engine.buy_orders)
+    print("Remaining Sell Orders:", engine.sell_orders)
+
+test_stock_engine()
+
